@@ -97,7 +97,7 @@ spec:
         repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.app_name }}-app
         repoVisibility: public
         sourcePath: ./tenant-app
-        defaultBranch: develop
+        defaultBranch: main
         protectDefaultBranch: false
 
     - id: register-to-github
