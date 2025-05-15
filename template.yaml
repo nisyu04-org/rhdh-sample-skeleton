@@ -107,13 +107,13 @@ spec:
       name: Registering the Catalog Info Component to GitHub
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['publish-app-to-github'].output.repoContentsUrl }}
+        repoContentsUrl: ${{ steps['publish-manifest-to-github'].output.repoContentsUrl }}
         catalogInfoPath: "/catalog-info.yaml"
   output:
     links:
       - title: Open the Source Code Repository
         if: ${{ parameters.git == "github" }}
-        url: ${{ steps['publish-app-to-github'].output.remoteUrl }}
+        url: ${{ steps['publish-manifest-to-github'].output.remoteUrl }}
       - title: Open the Catalog Info Component
         if: ${{ parameters.git == "github" }}
         icon: catalog
