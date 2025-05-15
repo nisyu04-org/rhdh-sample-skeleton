@@ -6,7 +6,7 @@ metadata:
   description: ${{ values.description }}
   {%- endif %}
 spec:
-  type: service
+  type: service 
   system: ${{ values.system }}
   lifecycle: production
   owner: ${{ values.owner }}

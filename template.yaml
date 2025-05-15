@@ -74,11 +74,13 @@ spec:
                   type: string
                   description: Specify the GitHub Organization or User to register the repository
   steps:
-    - id: app_template
-      name: Generating the Application Source Code Component
+    - id: manifest_template
+      name: Generating the OCP Manifest Component
       action: fetch:template
       input:
-        url: ./app-skeleton
+        url: ./manifest-skeleton
+        copyWithoutTemplating:
+          - .github/workflows/
         values:
           git: ${{ parameters.git }}
           git_host_url: ${{ parameters.git_host_url }}
@@ -87,16 +89,16 @@ spec:
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           description: ${{ parameters.description }}
-        targetPath: ./tenant-app
+        targetPath: ./tenant-manifest
 
-    - id: publish-app-to-github
+    - id: publish-manifest-to-github
       if: ${{ parameters.git == "github" }}
-      name: Publish App Repository to GitHub
+      name: Publish Manifest Repository to GitHub
       action: publish:github
       input:
-        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.app_name }}
+        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.app_name }}-manifest
         repoVisibility: public
-        sourcePath: ./tenant-app
+        sourcePath: ./tenant-manifest
         defaultBranch: main
         protectDefaultBranch: false
 
