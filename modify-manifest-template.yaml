@@ -38,17 +38,18 @@ spec:
       input:
         url: ${{ parameters.repoUrl }}
         branch: ${{ parameters.branch }}
+        targetPath: ./target
 
     - id: replace-values
       name: Replace values in ResourceQuota YAML
       action: roadiehq:utils:fs:replace
       input:
         files:
-          - file: 'manifests/resourcequota.yaml'
+          - file: './target/manifests/resourcequota.yaml'
             matchRegex: true
             find: 'limits\\.cpu:\\s*\\d+'
             replaceWith: ${{ parameters.limitsCpu }}
-          - file: 'manifests/resourcequota.yaml'
+          - file: './target/manifests/resourcequota.yaml'
             matchRegex: true
             find: 'limits\\.memory:\\s*\\d+'
             replaceWith: ${{ parameters.limitsMemory }}
@@ -65,3 +66,4 @@ spec:
         commitMessage: "Update resourcequpta via RHDH"
         gitAuthorName: "RHDH"
         forceFork: true
+        sourcePath: ./target
