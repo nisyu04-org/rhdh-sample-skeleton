@@ -21,12 +21,9 @@ spec:
           title: Git Branch
           type: string
           default: main
-
-parameters:
-  limitsCpu:
-    title: Replacer
-    type: integer
-    description: Text you want to use to replace i_want_to_replace_this
+    - limits.cpu:
+      title: limits.cpu
+      type: integer
   steps:
     - id: fetch
       name: Fetch repo
