@@ -1,0 +1,65 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: update-openshift-manifest
+  title: Update OpenShift Manifest
+  description: Modify deployment.yaml in a GitHub repo
+spec:
+  owner: team:devops
+  type: service
+
+  parameters:
+    - title: Repository Information
+      required:
+        - repoUrl
+        - branch
+      properties:
+        repoUrl:
+          title: GitHub Repository URL
+          type: string
+        branch:
+          title: Git Branch
+          type: string
+          default: main
+
+    - title: Manifest Update
+      required:
+        - replicas
+      properties:
+        replicas:
+          title: Number of Replicas
+          type: integer
+          default: 2
+
+  steps:
+    - id: fetch
+      name: Fetch repo
+      action: fetch:plain
+      input:
+        url: ${{ parameters.repoUrl }}
+        branch: ${{ parameters.branch }}
+
+    - id: modify
+      name: Modify deployment.yaml
+      action: transform:file
+      input:
+        files:
+          - path: manifests/resourcequota.yaml
+            transformations:
+              - type: yaml
+                operations:
+                  - op: replace
+                    path: /spec/hard/limits.cpu
+                    value: ${{ parameters.cpu }}
+                  - op: replace
+                    path: /spec/hard/limits.memory
+                    value: ${{ parameters.memory }}
+
+    - id: publish
+      name: Commit back
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        branch: ${{ parameters.branch }}
+        commitMessage: "Update resourcequpta via RHDH"
+
