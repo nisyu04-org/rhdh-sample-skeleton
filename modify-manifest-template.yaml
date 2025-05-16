@@ -60,5 +60,7 @@ spec:
         repoUrl: github.com?owner=nisyu04-org&repo=tenant-app-manifest
         branchName: develop
         targetBranchName: ${{ parameters.branch }}
+        title: "Title Update resourcequpta via RHDH"
+        description: "Discription Update resourcequpta via RHDH"
         commitMessage: "Update resourcequpta via RHDH"
         sourcePath: ./manifests
