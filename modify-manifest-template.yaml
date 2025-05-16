@@ -22,16 +22,11 @@ spec:
           type: string
           default: main
 
-    - title: Resource Limit Values
-      properties:
-        requestsCpu:
-          type: integer
-          title: requests.cpu
-          default: 4
-        limitsCpu:
-          type: integer
-          title: limits.cpu
-          default: 3
+parameters:
+  limitsCpu:
+    title: Replacer
+    type: integer
+    description: Text you want to use to replace i_want_to_replace_this
   steps:
     - id: fetch
       name: Fetch repo
@@ -48,7 +43,7 @@ spec:
           - file: 'manifests/resourcequota.yaml'
             matchRegex: true
             find: 'limits\.cpu:\s*"[^"]+"'
-            replaceWith: "10"
+            replaceWith: ${{ parameters.limitsCpu }}
     - id: publish
       name: Commit back
       action: publish:github
