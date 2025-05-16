@@ -48,7 +48,7 @@ spec:
           - file: './target/manifests/resourcequota.yaml'
             matchRegex: true
             find: 'limits\\.cpu:\\s*\\d+'
-            replaceWith: ${{ parameters.limitsCpu }}
+            replaceWith: 'limits.cpu: ${{ parameters.limitsCpu }}'
           - file: './target/manifests/resourcequota.yaml'
             find: 'limits.memory'
             replaceWith: ${{ parameters.limitsMemory }}
@@ -58,7 +58,7 @@ spec:
       action: publish:github:pull-request
       input:
         repoUrl: github.com?owner=nisyu04-org&repo=tenant-app-manifest
-        branchName: develop
+        branchName: nisyu04-org:develop
         targetBranchName: ${{ parameters.branch }}
         title: "Title Update resourcequpta via RHDH"
         description: "Discription Update resourcequpta via RHDH"
