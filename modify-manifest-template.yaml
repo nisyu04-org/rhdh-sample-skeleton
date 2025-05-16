@@ -27,9 +27,6 @@ spec:
           title: limits.cpu
           type: string
           default: "2"
-    - limits.cpu:
-      title: limits.cpu
-      type: string
   steps:
     - id: fetch
       name: Fetch repo
