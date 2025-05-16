@@ -48,7 +48,6 @@ spec:
       name: Commit back
       action: publish:github
       input:
-        repoUrl: ${{ parameters.repoUrl }}
+        url: ${{ parameters.repoUrl }}
         branch: ${{ parameters.branch }}
         commitMessage: "Update resourcequpta via RHDH"
-
