@@ -63,7 +63,7 @@ spec:
           - file: './target/manifests/resourcequota.yaml'
             matchRegex: true
             find: '(limits\.cpu:\s*)\d+'
-            replaceWith: 'limits.cpu: ${{ parameters.limitsCpu }}'
+            replaceWith: '$1${{ parameters.limitsCpu }}'
 
     - id: replace-limits-memory
       name: Update Memory Limit
@@ -73,7 +73,7 @@ spec:
         files:
           - file: './target/manifests/resourcequota.yaml'
             find: '(limits\.memory:\s*)\d+Gi'
-            replaceWith: 'limits.memory: ${{ parameters.limitsMemory }}Gi'
+            replaceWith: '$1${{ parameters.limitsMemory }}Gi'
 
     - id: pull-request
       name: Pull request
