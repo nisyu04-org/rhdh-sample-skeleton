@@ -48,7 +48,7 @@ spec:
           - file: 'manifests/resourcequota.yaml'
             matchRegex: true
             find: 'limits\.cpu:\s*"[^"]+"'
-            replaceWith: {{ parameters.limitsCpu }}
+            replaceWith: "10"
     - id: publish
       name: Commit back
       action: publish:github
