@@ -40,11 +40,11 @@ spec:
         limitsCpu:
           title: limits.cpu
           type: string
-          default: "2"
+          default: ''
         limitsMemory:
           title: limits.memory
           type: string
-          default: "10Gi"
+          default: ''
   steps:
     - id: fetch
       name: Fetch repository
@@ -88,3 +88,4 @@ spec:
         gitAuthorName: "RHDH"
         forceFork: true
         sourcePath: ./target
+        targetPath: ./manifests
