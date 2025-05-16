@@ -72,6 +72,7 @@ spec:
       input:
         files:
           - file: './target/manifests/resourcequota.yaml'
+            matchRegex: true
             find: '(limits\.memory:\s*)\d+.*'
             replaceWith: '$1${{ parameters.limitsMemory }}Gi'
 
