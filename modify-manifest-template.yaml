@@ -55,11 +55,10 @@ spec:
 
     - id: publish
       name: Commit back
-      action: publish:github
+      action: github:branch:push
       input:
         repoUrl: github.com?owner=nisyu04-org&repo=tenant-app-manifest
-        remoteUrl: https://github.com/nisyu04-org/tenant-app-manifest.git
-        branch: ${{ parameters.branch }}
-        commitMessage: "Update resourcequpta via RHDH"
+        defaultBranch: ${{ parameters.branch }}
+        gitCommitMessage: "Update resourcequpta via RHDH"
         sourcePath: ./manifests
-        overwrite: true
+        allowedHosts: ['github.com']
