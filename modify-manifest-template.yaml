@@ -53,7 +53,7 @@ spec:
       action: roadiehq:utils:fs:replace
       input:
         files:
-          - path: "manifests/resourcequota.yaml"
+          - file: 'manifests/resourcequota.yaml'
         replacements:
           - search: 'requests.cpu: "10"'
             replace: 'requests.cpu: "{{ parameters.requestsCpu }}"'
