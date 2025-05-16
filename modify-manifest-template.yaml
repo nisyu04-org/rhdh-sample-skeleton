@@ -23,7 +23,7 @@ spec:
           default: main
     - limits.cpu:
       title: limits.cpu
-      type: integer
+      type: string
   steps:
     - id: fetch
       name: Fetch repo
