@@ -42,7 +42,7 @@ spec:
           type: string
           default: ''
         limitsMemory:
-          title: limits.memory
+          title: limits.memory (Gi)
           type: string
           default: ''
   steps:
@@ -72,8 +72,8 @@ spec:
       input:
         files:
           - file: './target/manifests/resourcequota.yaml'
-            find: '(limits\.memory:\s*)\d+'
-            replaceWith: 'limits.memory: ${{ parameters.limitsMemory }}'
+            find: '(limits\.memory:\s*)\d+Gi'
+            replaceWith: 'limits.memory: ${{ parameters.limitsMemory }}Gi'
 
     - id: pull-request
       name: Pull request
