@@ -11,14 +11,31 @@ spec:
   parameters:
     - title: Repository Information
       required:
-        - repoUrl
+        - githubHost
+        - githubOwner
+        - repository
         - branch
+        - targetBranch
       properties:
-        repoUrl:
-          title: GitHub Repository URL
+        githubHost:
+          title: GitHub Host name
           type: string
+          default: github.com
+        githubOwner:
+            title: GitHub Owner
+            type: string
+        repoUrl:
+            title: GitHub Repository URL
+            type: string
+        repository:
+            title: GitHub Repository
+            type: string
         branch:
-          title: Git Branch
+          title: Branch name
+          type: string
+          default: develop
+        targetBranch:
+          title: Target branch name
           type: string
           default: main
     - title: ResourceQuota values
@@ -37,7 +54,7 @@ spec:
       action: fetch:plain
       input:
         url: ${{ parameters.repoUrl }}
-        branch: ${{ parameters.branch }}
+        branch: main
         targetPath: ./target
 
     - id: replace-values
@@ -57,9 +74,9 @@ spec:
       name: Commit back
       action: publish:github:pull-request
       input:
-        repoUrl: github.com?owner=nisyu04-org&repo=tenant-app-manifest
-        branchName: nisyu04-org:develop
-        targetBranchName: ${{ parameters.branch }}
+        repoUrl: ${{ parameters.githubHost }}?owner=${{ parameters.githubOwner }}&repo=${{ parameters.repository }}
+        branchName: ${{ parameters.branch }}
+        targetBranchName: ${{ parameters.targetBranch }}
         title: "Title Update resourcequpta via RHDH"
         description: "Discription Update resourcequpta via RHDH"
         commitMessage: "Update resourcequpta via RHDH"
