@@ -48,6 +48,6 @@ spec:
       name: Commit back
       action: publish:github
       input:
-        url: ${{ parameters.repoUrl }}
+        repoUrl: github.com?owner=nisyu04-org&repo=tenant-app-manifest
         branch: ${{ parameters.branch }}
         commitMessage: "Update resourcequpta via RHDH"
