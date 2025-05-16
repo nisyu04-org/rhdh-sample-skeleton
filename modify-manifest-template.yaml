@@ -24,9 +24,6 @@ spec:
         githubOwner:
             title: GitHub Owner
             type: string
-        repoUrl:
-            title: GitHub Repository URL
-            type: string
         repository:
             title: GitHub Repository
             type: string
@@ -53,7 +50,7 @@ spec:
       name: Fetch repo
       action: fetch:plain
       input:
-        url: ${{ parameters.repoUrl }}
+        url: https://${{ parameters.githubHost }}/${{ parameters.githubOwner }}/${{ parameters.repository }}
         branch: main
         targetPath: ./target
 
