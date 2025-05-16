@@ -46,11 +46,11 @@ spec:
         files:
           - file: 'manifests/resourcequota.yaml'
             matchRegex: true
-            find: 'limits\.cpu:\s*"[^"]+"'
+            find: 'limits\\.cpu:\\s*\\d+'
             replaceWith: ${{ parameters.limitsCpu }}
           - file: 'manifests/resourcequota.yaml'
             matchRegex: true
-            find: 'limits\.memory:\s*"[^"]+"'
+            find: 'limits\\.memory:\\s*\\d+'
             replaceWith: ${{ parameters.limitsMemory }}
 
     - id: publish
