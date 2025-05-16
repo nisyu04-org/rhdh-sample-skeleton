@@ -75,8 +75,8 @@ spec:
             find: 'limits.memory'
             replaceWith: ${{ parameters.limitsMemory }}
 
-    - id: publish
-      name: Commit back
+    - id: pull-request
+      name: Pull request
       action: publish:github:pull-request
       input:
         repoUrl: ${{ parameters.githubHost }}?owner=${{ parameters.githubOwner }}&repo=${{ parameters.repository }}
