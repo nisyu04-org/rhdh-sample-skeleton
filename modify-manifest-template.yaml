@@ -22,14 +22,23 @@ spec:
           type: string
           default: main
 
-    - title: Manifest Update
+    - title: Manifest Update CPU
       required:
-        - replicas
+        - cpu
       properties:
-        replicas:
-          title: Number of Replicas
-          type: integer
-          default: 2
+        cpu:
+          title: Number of CPU
+          type: string
+          default: "2"
+
+    - title: Manifest Update Memory
+      required:
+        - memory
+      properties:
+        memory:
+          title: Memory size
+          type: string
+          default: "10Gi"
 
   steps:
     - id: fetch
