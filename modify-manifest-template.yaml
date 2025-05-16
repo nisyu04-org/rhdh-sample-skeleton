@@ -25,21 +25,13 @@ spec:
     - title: Resource Limit Values
       properties:
         requestsCpu:
-          type: string
+          type: integer
           title: requests.cpu
-          default: "4"
-        requestsMemory:
-          type: string
-          title: requests.memory
-          default: "8Gi"
+          default: 4
         limitsCpu:
-          type: string
+          type: integer
           title: limits.cpu
-          default: "3"
-        limitsMemory:
-          type: string
-          title: limits.memory
-          default: "10Gi"
+          default: 3
   steps:
     - id: fetch
       name: Fetch repo
@@ -55,8 +47,8 @@ spec:
         files:
           - file: 'manifests/resourcequota.yaml'
             matchRegex: true
-            find: 'limits\.memory:\s*"[^"]+"'
-            replaceWith: {{ parameters.limitsMemory }}
+            find: 'limits\.cpu:\s*"[^"]+"'
+            replaceWith: {{ parameters.limitsCpu }}
     - id: publish
       name: Commit back
       action: publish:github
