@@ -88,4 +88,4 @@ spec:
         gitAuthorName: "RHDH"
         forceFork: true
         sourcePath: ./target
-        targetPath: ./manifests
+        targetPath: ./
