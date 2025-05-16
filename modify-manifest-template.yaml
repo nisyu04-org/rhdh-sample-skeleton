@@ -72,8 +72,8 @@ spec:
       input:
         files:
           - file: './target/manifests/resourcequota.yaml'
-            find: 'limits.memory'
-            replaceWith: ${{ parameters.limitsMemory }}
+            find: '(limits\.memory:\s*)\d+'
+            replaceWith: 'limits.memory: ${{ parameters.limitsMemory }}'
 
     - id: pull-request
       name: Pull request
