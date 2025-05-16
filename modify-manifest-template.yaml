@@ -54,6 +54,19 @@ spec:
       input:
         files:
           - file: 'manifests/resourcequota.yaml'
+            find: 'requests.cpu'
+            replaceWith: {{ parameters.requestsCpu }}
+          - file: 'manifests/resourcequota.yaml'
+            find: 'requests.memory:'
+            replaceWith: {{ parameters.requestsMemory }}
+          - file: 'manifests/resourcequota.yaml'
+            find: 'limits.cpu'
+            replaceWith: {{ parameters.limitsCpu }}
+          - file: 'manifests/resourcequota.yaml'
+            find: 'limits.memory'
+            replaceWith: {{ parameters.limitsMemory }}
+
+
         replacements:
           - search: 'requests.cpu: "10"'
             replace: 'requests.cpu: "{{ parameters.requestsCpu }}"'
