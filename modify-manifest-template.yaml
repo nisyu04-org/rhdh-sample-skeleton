@@ -25,7 +25,7 @@ spec:
     - title: Resource Limit Values
       properties:
         requestsCpu:
-          type: 
+          type: string
           title: requests.cpu
           default: "4"
         requestsMemory:
