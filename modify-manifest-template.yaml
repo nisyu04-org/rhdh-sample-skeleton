@@ -25,13 +25,13 @@ spec:
     - title: Resource Limit Values
       properties:
         requestsCpu:
-          type: string
+          type: 
           title: requests.cpu
           default: "4"
         requestsMemory:
           type: string
           title: requests.memory
-          default: 8Gi
+          default: "8Gi"
         limitsCpu:
           type: string
           title: limits.cpu
@@ -39,7 +39,7 @@ spec:
         limitsMemory:
           type: string
           title: limits.memory
-          default: 10Gi
+          default: "10Gi"
   steps:
     - id: fetch
       name: Fetch repo
