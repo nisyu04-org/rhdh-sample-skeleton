@@ -47,8 +47,8 @@ spec:
         files:
           - file: './target/manifests/resourcequota.yaml'
             matchRegex: true
-            find: 'limits\\.cpu:\\s*\\d+'
-            replaceWith: 'limits.cpu: ${{ parameters.limitsCpu }}'
+            find: '(limits\.cpu:\s*)\d+'
+            replaceWith: '${1}${{ parameters.limitsCpu }}'
           - file: './target/manifests/resourcequota.yaml'
             find: 'limits.memory'
             replaceWith: ${{ parameters.limitsMemory }}
