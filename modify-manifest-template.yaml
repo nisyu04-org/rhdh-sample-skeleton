@@ -47,22 +47,30 @@ spec:
           default: "10Gi"
   steps:
     - id: fetch
-      name: Fetch repo
+      name: Fetch repository
       action: fetch:plain
       input:
         url: https://${{ parameters.githubHost }}/${{ parameters.githubOwner }}/${{ parameters.repository }}
         branch: main
         targetPath: ./target
 
-    - id: replace-values
-      name: Replace values in ResourceQuota YAML
+    - id: replace-limits-cpu
+      name: Update CPU Limit
+      if: ${{ parameters.limitsCpu != '' }}
       action: roadiehq:utils:fs:replace
       input:
         files:
           - file: './target/manifests/resourcequota.yaml'
             matchRegex: true
             find: '(limits\.cpu:\s*)\d+'
-            replaceWith: '${1}${{ parameters.limitsCpu }}'
+            replaceWith: 'limits.cpu: ${{ parameters.limitsCpu }}'
+
+    - id: replace-limits-memory
+      name: Update Memory Limit
+      if: ${{ parameters.limitsMemory != '' }}
+      action: roadiehq:utils:fs:replace
+      input:
+        files:
           - file: './target/manifests/resourcequota.yaml'
             find: 'limits.memory'
             replaceWith: ${{ parameters.limitsMemory }}
