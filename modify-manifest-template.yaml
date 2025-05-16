@@ -86,6 +86,5 @@ spec:
         description: "Discription Update resourcequpta via RHDH"
         commitMessage: "Update resourcequpta via RHDH"
         gitAuthorName: "RHDH"
-        forceFork: true
         sourcePath: ./target
         targetPath: ./
