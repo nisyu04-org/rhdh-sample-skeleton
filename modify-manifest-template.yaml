@@ -50,8 +50,7 @@ spec:
             find: 'limits\\.cpu:\\s*\\d+'
             replaceWith: ${{ parameters.limitsCpu }}
           - file: './target/manifests/resourcequota.yaml'
-            matchRegex: true
-            find: 'limits\\.memory:\\s*\\d+'
+            find: 'limits.memory'
             replaceWith: ${{ parameters.limitsMemory }}
 
     - id: publish
