@@ -22,24 +22,24 @@ spec:
           type: string
           default: main
 
-    - title: Manifest Update CPU
-      required:
-        - cpu
+    - title: Resource Limit Values
       properties:
-        cpu:
-          title: Number of CPU
+        requestsCpu:
           type: string
-          default: "2"
-
-    - title: Manifest Update Memory
-      required:
-        - memory
-      properties:
-        memory:
-          title: Memory size
+          title: requests.cpu
+          default: "4"
+        requestsMemory:
           type: string
-          default: "10Gi"
-
+          title: requests.memory
+          default: 8Gi
+        limitsCpu:
+          type: string
+          title: limits.cpu
+          default: "3"
+        limitsMemory:
+          type: string
+          title: limits.memory
+          default: 10Gi
   steps:
     - id: fetch
       name: Fetch repo
@@ -48,21 +48,21 @@ spec:
         url: ${{ parameters.repoUrl }}
         branch: ${{ parameters.branch }}
 
-    - id: modify
-      name: Modify deployment.yaml
-      action: transform:file
+    - id: replace-values
+      name: Replace values in ResourceQuota YAML
+      action: roadiehq:utils:fs:replace
       input:
         files:
-          - path: manifests/resourcequota.yaml
-            transformations:
-              - type: yaml
-                operations:
-                  - op: replace
-                    path: /spec/hard/limits.cpu
-                    value: ${{ parameters.cpu }}
-                  - op: replace
-                    path: /spec/hard/limits.memory
-                    value: ${{ parameters.memory }}
+          - ./resource-quota.yaml
+        replacements:
+          - search: 'requests.cpu: "10"'
+            replace: 'requests.cpu: "{{ parameters.requestsCpu }}"'
+          - search: 'requests.memory: 10Gi'
+            replace: 'requests.memory: {{ parameters.requestsMemory }}'
+          - search: 'limits.cpu: "6"'
+            replace: 'limits.cpu: "{{ parameters.limitsCpu }}"'
+          - search: 'limits.memory: 12Gi'
+            replace: 'limits.memory: {{ parameters.limitsMemory }}'
 
     - id: publish
       name: Commit back
