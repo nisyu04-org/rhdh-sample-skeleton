@@ -63,6 +63,4 @@ spec:
         title: "Title Update resourcequpta via RHDH"
         description: "Discription Update resourcequpta via RHDH"
         commitMessage: "Update resourcequpta via RHDH"
-        sourcePath: ./manifests
-        targetPath: ./manifests
         gitAuthorName: "RHDH"
