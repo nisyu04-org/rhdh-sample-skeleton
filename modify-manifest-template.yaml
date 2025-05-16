@@ -56,17 +56,15 @@ spec:
           - file: 'manifests/resourcequota.yaml'
             find: 'requests.cpu'
             replaceWith: {{ parameters.requestsCpu }}
-
-        replacements:
-          - search: 'requests.cpu: "10"'
-            replace: 'requests.cpu: "{{ parameters.requestsCpu }}"'
-          - search: 'requests.memory: 10Gi'
-            replace: 'requests.memory: {{ parameters.requestsMemory }}'
-          - search: 'limits.cpu: "6"'
-            replace: 'limits.cpu: "{{ parameters.limitsCpu }}"'
-          - search: 'limits.memory: 12Gi'
-            replace: 'limits.memory: {{ parameters.limitsMemory }}'
-
+          - file: 'manifests/resourcequota.yaml'
+            find: 'requests.memory:'
+            replaceWith: {{ parameters.requestsMemory }}
+          - file: 'manifests/resourcequota.yaml'
+            find: 'limits.cpu'
+            replaceWith: {{ parameters.limitsCpu }}
+          - file: 'manifests/resourcequota.yaml'
+            find: 'limits.memory'
+            replaceWith: {{ parameters.limitsMemory }}
     - id: publish
       name: Commit back
       action: publish:github
