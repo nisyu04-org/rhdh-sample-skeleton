@@ -21,6 +21,12 @@ spec:
           title: Git Branch
           type: string
           default: main
+    - title: ResourceQuota values
+      properties:
+        limitsCpu:
+          title: limits.cpu
+          type: string
+          default: "2"
     - limits.cpu:
       title: limits.cpu
       type: string
